@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "satbilling",
     "public": "www",
     "ignore": [
       "firebase.json",

@@ -1,0 +1,27 @@
+<div  class="ion-padding">
+  <form [formGroup]="form" class="ion-padding" (submit)="save()">
+
+    <ion-item class="ion-padding-horizontal border">
+      <ion-input #inputId type="text" formControlName="name" placeholder="Name*"><ion-icon name="gift" class="ion-padding"></ion-icon></ion-input>
+    </ion-item>
+    <div class="validation-errors ion-padding">
+        <div class="error-message" *ngIf="form.get('name').hasError('validatename')">
+            <ion-icon name="information-circle-outline"></ion-icon> Enter valid name
+        </div>
+    </div>
+
+    <ion-item class="ion-padding-horizontal border">
+      <ion-input type="number" formControlName="price" placeholder="Price*"><ion-icon name="pricetags" class="ion-padding"></ion-icon></ion-input>
+    </ion-item>
+    <div class="validation-errors ion-padding">
+        <div class="error-message" *ngIf="form.get('price').hasError('validateprice')">
+            <ion-icon name="information-circle-outline"></ion-icon> Enter valid name
+        </div>
+    </div>
+
+    <button hidden [disabled]="!form.valid"></button>
+    <ion-button expand="full" type="submit" [disabled]="!form.valid">Save</ion-button>
+    <ion-button expand="full" (click)="cancel()">Close</ion-button>  
+  </form>
+
+</div>

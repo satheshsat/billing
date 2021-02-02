@@ -1,0 +1,119 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class='ion-text-center'>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class='ion-text-center ion-padding'>
+
+
+
+  <ion-grid fixed>
+
+    <ion-row class='ion-padding'>
+
+      <ion-col>
+        <ion-button expand="full" (click)='addCustomer()' [disabled]="bill.customer.name != null">
+          <ion-icon slot="start" name="add"></ion-icon>
+          Customer
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="full" (click)='addItem()'>
+          <ion-icon slot="start" name="add"></ion-icon>
+          Item
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="full" (click)='addTax()' [disabled]="!bill.item.length">
+          <ion-icon slot="start" name="add"></ion-icon>
+          Tax
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="full" (click)='addDiscount()' [disabled]="!bill.item.length">
+          <ion-icon slot="start" name="add"></ion-icon>
+          Discount
+        </ion-button>
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row *ngIf="bill.customer.name" class="ion-align-items-center font-large">
+      <ion-col size="1"><ion-icon name="trash" class='icon-padding' (click)="deleteCustomer()"></ion-icon><ion-icon name="create" class='icon-padding' (click)="editCustomer()"></ion-icon></ion-col>
+      <ion-col>Name: {{bill.customer.name}}</ion-col>
+      <ion-col>Phone: {{bill.customer.phone}}</ion-col>
+      <ion-col size='8'>Email: {{bill.customer.email}}</ion-col>
+    </ion-row>
+
+    <ion-row class='ion-padding ion-align-items-center border font-large'>
+
+      <ion-col size="1"></ion-col>
+      <ion-col>No</ion-col>
+      <ion-col size='6'>Item</ion-col>
+      <ion-col>Qty</ion-col>
+      <ion-col>Price</ion-col>
+
+    </ion-row>
+
+    <ion-row class='ion-padding ion-align-items-center border font-medium' *ngFor="let item of bill.item; let i = index">
+
+      <ion-col size="1"><ion-icon name="trash" class='icon-padding' (click)="deleteItem(i)"></ion-icon><ion-icon name="create" class='icon-padding' (click)="editItem(i)"></ion-icon></ion-col>
+      <ion-col>{{i+1}}</ion-col>
+      <ion-col size='6'>{{item.name}}</ion-col>
+      <ion-col>{{item.quantity}} {{item.unit}}</ion-col>
+      <ion-col>{{item.total_price}}</ion-col>
+
+    </ion-row>
+
+    <ion-row class='ion-padding ion-align-items-center border font-medium'>
+
+      <ion-col></ion-col>
+      <ion-col size='6'></ion-col>
+      <ion-col></ion-col>
+      <ion-col></ion-col>
+
+    </ion-row>
+
+    <ion-row class='ion-padding ion-align-items-center border font-medium' *ngFor="let tax of bill.tax; let i = index">
+
+      <ion-col size="1"><ion-icon name="trash" class='icon-padding' (click)="deleteTax(i)"></ion-icon><ion-icon name="create" class='icon-padding' (click)="editTax(i)"></ion-icon></ion-col>
+      <ion-col><ion-icon name="bar-chart"></ion-icon></ion-col>
+      <ion-col size='6'>{{tax.name}}</ion-col>
+      <ion-col></ion-col>
+      <ion-col>{{tax.price}}</ion-col>
+
+    </ion-row>
+
+    <ion-row class='ion-padding ion-align-items-center border font-medium' *ngFor="let discount of bill.discount; let i = index">
+
+      <ion-col size="1"><ion-icon name="trash" class='icon-padding' (click)="deleteDiscount(i)"></ion-icon><ion-icon name="create" class='icon-padding' (click)="editDiscount(i)"></ion-icon></ion-col>
+      <ion-col><ion-icon name="gift"></ion-icon></ion-col>
+      <ion-col size='6'>{{discount.name}}</ion-col>
+      <ion-col></ion-col>
+      <ion-col>-{{discount.price}}</ion-col>
+
+    </ion-row>
+
+    <ion-row class='ion-padding ion-align-items-center border font-large'>
+
+      <ion-col></ion-col>
+      <ion-col size='6'></ion-col>
+      <ion-col>Total</ion-col>
+      <ion-col>{{bill.total}}</ion-col>
+
+    </ion-row>
+
+    <ion-row>
+      <ion-col offset='9' size='3'>
+        <ion-button expand="full" (click)="save()" [disabled]="!bill.item.length">Save</ion-button>  
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

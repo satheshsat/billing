@@ -1,0 +1,10 @@
+{
+  "name": "Billing",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "hooks":{
+    "build:after": "./manifest-hook.js"
+  }
+}
